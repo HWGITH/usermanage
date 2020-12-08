@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--
+        targetRuntime 属性设置生成的Mybatis代码的版本
+            MyBatis3Simple      标准版，只用CRUD功能
+            MyBatis3            豪华版本
+    -->
+    <context id="DB2Tables" targetRuntime="MyBatis3"
+    defaultModelType="flat">
+
+        <!-- 去掉全部的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 修改数据库的连接属性 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql:///ssm"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--
+            javaModelGenerator标签配置JavaBean生成
+                targetPackage 指定包名
+                targetProject 生成代码放在哪个位置
+        -->
+        <javaModelGenerator targetPackage="com.atguigu.pojo" targetProject="./100_ssm/src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--
+            sqlMapGenerator配置生成Mapper.xml配置文件
+                targetPackage 指定包名
+                targetProject 生成代码放在哪个位置
+        -->
+        <sqlMapGenerator targetPackage="com.atguigu.mapper"  targetProject="./100_ssm/src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--
+            javaClientGenerator 配置生成Mapper接口
+                targetPackage 指定包名
+                targetProject 生成代码放在哪个位置
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.atguigu.mapper"
+                             targetProject="./100_ssm/src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--
+            一个table表示数据库里一个表
+                tableName="t_user"          是表名
+                domainObjectName="User"     是JavaBean对象类名
+         -->
+        <table tableName="t_book" domainObjectName="Book" />
+
+    </context>
+</generatorConfiguration>
